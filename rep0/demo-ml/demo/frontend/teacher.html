@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Teacher Summary</title>
+</head>
+<body>
+  <h2>View Teacher Summary</h2>
+  <form id="teacherForm">
+    <label>Teacher Name:</label><br>
+    <input type="text" id="teacherName" required>
+    <button type="submit">Get Summary</button>
+  </form>
+
+  <div id="summary"></div>
+
+  <script>
+    document.getElementById("teacherForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const teacher = document.getElementById("teacherName").value;
+      const response = await fetch(http://127.0.0.1:8000/summary/${teacher});
+      const data = await response.json();
+      document.getElementById("summary").innerHTML = `
+        <h3>Teacher: ${data.teacher}</h3>
+        <p><strong>Average Rating:</strong> ${data.avg_rating}</p>
+        <p><strong>Summary:</strong> ${data.summary}</p>
+      `;
+    });
+  </script>
+</body>
+</html>
